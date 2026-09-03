@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Urban Weather Analytics</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>🌦️ Smart Urban Weather Analytics</h1>
+  <p>Real-time multi-source monitoring, forecasting &amp; anomaly detection for city zones</p>
+</header>
+
+<main>
+  <div class="controls">
+    <label for="zoneSelect">Zone:</label>
+    <select id="zoneSelect">
+      {% for zone in zones %}
+      <option value="{{ zone }}">{{ zone }}</option>
+      {% endfor %}
+    </select>
+    <span id="anomalyBadge" class="badge"></span>
+  </div>
+
+  <section class="cards">
+    <div class="card">
+      <h3>Temperature (last 7 days)</h3>
+      <canvas id="tempChart"></canvas>
+    </div>
+    <div class="card">
+      <h3>Humidity &amp; Wind</h3>
+      <canvas id="humidityWindChart"></canvas>
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3>6-Hour Forecast</h3>
+      <canvas id="forecastChart"></canvas>
+    </div>
+    <div class="card">
+      <h3>Recent Anomalies</h3>
+      <table id="anomalyTable">
+        <thead><tr><th>Time</th><th>Temp (°C)</th><th>Humidity (%)</th><th>Score</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
